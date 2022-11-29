@@ -1,31 +1,29 @@
 import React from "react";
 
-interface HeadingsProps{
-     headers : string[]
-}
 
-const TableHead : React.FC<HeadingsProps> = ({headers}) => {
+const TableHead :React.FC<HeadingFieldsProps> = ({headers}) => {
      return <tr className='main-table__tr'>
           {headers.map((el, i) => <th key={el + i}>{el}</th>)}
      </tr>
 }
 
-const TableRow : React.FC<{fields : string}> = ({fields}) => {
+const TableRow : React.FC<Fields> = ({email, country,lastname,firstname,city}) => {
      return <tr className='main-table__tr'>
-          <td>{}</td>
-          <td>{}</td>
-          <td>{}</td>
-          <td>{}</td>
-          <td>{}</td>
+          <td>{firstname}</td>
+          <td>{lastname}</td>
+          <td>{email}</td>
+          <td>{country}</td>
+          <td>{city}</td>
      </tr>
 }
-
-export const Table : React.FC<{ props: string[] }> = ({props}) => {
-     const headers: string[] = ["1", "2"] ;
+;
+export const Table : React.FC<{fields : Fields[], headers: string[]}> = ({ fields, headers}) => {
 
 
      return <table className='main-table'>
           <TableHead headers={headers} />
-          {props.map((el, i) => <TableRow key={i + el} fields={el}/>)}
+          {fields.map((el, i) => <TableRow key={i + el.lastname} country={el.country}
+                                           city={el.city} firstname={el.firstname}
+                                           lastname={el.lastname} email={el.email}/>)}
      </table>
 }

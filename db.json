@@ -1,0 +1,47 @@
+{
+  "users": [
+    {
+      "firstname": "Nickie",
+      "lastname": "Brieta",
+      "city": "Petropavlovsk-Kamchatsky",
+      "country": "Bermuda",
+      "email uses current data": "Nickie.Brieta@gmail.com"
+    },
+    {
+      "firstname": "Anica",
+      "lastname": "Thomasina",
+      "city": "Surat",
+      "country": "Central African Republic",
+      "email uses current data": "Anica.Thomasina@gmail.com"
+    },
+    {
+      "firstname": "Suzette",
+      "lastname": "Alva",
+      "city": "Zürich",
+      "country": "Lao People\"S Democratic Republic",
+      "email uses current data": "Suzette.Alva@gmail.com"
+    },
+    {
+      "firstname": "Ulrike",
+      "lastname": "Capello",
+      "city": "Vitória",
+      "country": "Bermuda",
+      "email uses current data": "Ulrike.Capello@gmail.com"
+    },
+    {
+      "firstname": "Frank",
+      "lastname": "Wattenberg",
+      "city": "Mamoudzou",
+      "country": "Lebanon",
+      "email uses current data": "Frank.Wattenberg@gmail.com"
+    },
+    {
+      "firstname": "Agnese",
+      "lastname": "Georas",
+      "city": "Milwaukee",
+      "country": "Jersey",
+      "email uses current data": "Agnese.Georas@gmail.com"
+    }
+  ],
+  "headers" : ["firstname","lastname", "email", "country", "city"]
+}
