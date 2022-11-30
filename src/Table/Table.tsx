@@ -1,4 +1,5 @@
-import React from "react";
+import React, {useState} from "react";
+import InfiniteScroll from 'react-infinite-scroll-component';
 import './Table.scss'
 
 const TableHead :React.FC<HeadingFieldsProps> = ({headers}) => {
@@ -20,15 +21,22 @@ const TableRow : React.FC<Fields> = ({email, country,lastname,firstname,city}) =
 }
 
 const TableMain : React.FC<{fields : Fields[], headers: string[]}> = ({ fields, headers}) => {
+     const [loaderData, setLoaderData]: [Fields[], Function] = useState<Fields[]>(fields);
+     const loadMore = () => {
+          setTimeout(() => {
 
+          }, 350)
+     }
 
      return <table className='main-table'>
-          <TableHead headers={headers} />
-          <tbody>
-          {fields.map((el, i) => <TableRow key={i + el.lastname} country={el.country}
-                                           city={el.city} firstname={el.firstname}
-                                           lastname={el.lastname} email={el.email}/>)}
-          </tbody>
+          <InfiniteScroll dataLength={10} hasMore={true} loader={}>
+               <TableHead headers={headers} />
+               <tbody>
+               {fields.map((el, i) => <TableRow key={i + el.lastname} country={el.country}
+                                                city={el.city} firstname={el.firstname}
+                                                lastname={el.lastname} email={el.email}/>)}
+               </tbody>
+          </InfiniteScroll>
      </table>
 }
 export const Table = React.memo(TableMain)
