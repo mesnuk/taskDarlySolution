@@ -22,10 +22,12 @@ const TableRow : React.FC<Fields> = ({email, country,lastname,firstname,city}) =
 
 const TableMain : React.FC<{fields : Fields[], headers: string[]}> = ({ fields, headers}) => {
      const [count, setCount] = useState(10);
-     const [loaderData, setLoaderData]: [Fields[], Function] = useState<Fields[]>(fields.slice(count));
+     const [isMore, setIsMore] = useState(fields.length > 10);
+     const [loaderData, setLoaderData]: [Fields[], Function] = useState<Fields[]>(fields.slice(10));
      const loadMore = () => {
           setTimeout(() => {
-
+               setCount(count + 5);
+               setLoaderData(fields.slice(count + 5))
           }, 350)
      }
 
