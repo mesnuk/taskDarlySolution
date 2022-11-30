@@ -21,7 +21,8 @@ const TableRow : React.FC<Fields> = ({email, country,lastname,firstname,city}) =
 }
 
 const TableMain : React.FC<{fields : Fields[], headers: string[]}> = ({ fields, headers}) => {
-     const [loaderData, setLoaderData]: [Fields[], Function] = useState<Fields[]>(fields);
+     const [count, setCount] = useState(10);
+     const [loaderData, setLoaderData]: [Fields[], Function] = useState<Fields[]>(fields.slice(count));
      const loadMore = () => {
           setTimeout(() => {
 
@@ -29,7 +30,7 @@ const TableMain : React.FC<{fields : Fields[], headers: string[]}> = ({ fields, 
      }
 
      return <table className='main-table'>
-          <InfiniteScroll dataLength={10} hasMore={true} loader={}>
+          <InfiniteScroll dataLength={loaderData.length} hasMore={true} loader={}>
                <TableHead headers={headers} />
                <tbody>
                {fields.map((el, i) => <TableRow key={i + el.lastname} country={el.country}
