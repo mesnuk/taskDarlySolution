@@ -27,12 +27,13 @@ const TableMain : React.FC<{fields : Fields[], headers: string[]}> = ({ fields, 
      const loadMore = () => {
           setTimeout(() => {
                setCount(count + 5);
-               setLoaderData(fields.slice(count + 5))
+               setLoaderData(fields.slice(count))
+               if(fields.length < count + 5) setIsMore(false);
           }, 350)
      }
 
      return <table className='main-table'>
-          <InfiniteScroll dataLength={loaderData.length} hasMore={true} loader={}>
+          <InfiniteScroll dataLength={loaderData.length} hasMore={isMore} loader={}>
                <TableHead headers={headers} />
                <tbody>
                {fields.map((el, i) => <TableRow key={i + el.lastname} country={el.country}
