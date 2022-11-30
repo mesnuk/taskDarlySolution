@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import InfiniteScroll from 'react-infinite-scroll-component';
 import './Table.scss'
 
@@ -22,25 +22,38 @@ const TableRow : React.FC<Fields> = ({email, country,lastname,firstname,city}) =
 
 const TableMain : React.FC<{fields : Fields[], headers: string[]}> = ({ fields, headers}) => {
      const [count, setCount] = useState(10);
-     const [isMore, setIsMore] = useState(fields.length > 10);
-     const [loaderData, setLoaderData]: [Fields[], Function] = useState<Fields[]>(fields.slice(10));
+     const [isMore, setIsMore] = useState(true);
+     const [loaderData, setLoaderData]: [Fields[], Function] = useState<Fields[]>(fields.slice(0,10));
+     const LOAD = 5;
+
      const loadMore = () => {
           setTimeout(() => {
-               setCount(count + 5);
-               setLoaderData(fields.slice(count))
-               if(fields.length < count + 5) setIsMore(false);
-          }, 350)
+               setCount(count + LOAD);
+               setLoaderData(fields.slice(0, count + LOAD))
+               if(fields.length < count + LOAD) setIsMore(false);
+          }, 1000)
      }
+     useEffect(() => {
+          setIsMore(true)
+          setLoaderData(fields.slice(0, 10))
+     },[fields])
 
-     return <table className='main-table'>
-          <InfiniteScroll dataLength={loaderData.length} hasMore={isMore} loader={}>
-               <TableHead headers={headers} />
-               <tbody>
-               {fields.map((el, i) => <TableRow key={i + el.lastname} country={el.country}
-                                                city={el.city} firstname={el.firstname}
-                                                lastname={el.lastname} email={el.email}/>)}
-               </tbody>
-          </InfiniteScroll>
-     </table>
+
+     return (
+         <InfiniteScroll dataLength={loaderData.length} hasMore={isMore}
+                         loader={<h1>Loading.... </h1>} next={loadMore}
+                         endMessage={<h1>No more data;)</h1>}>
+              <table className='main-table'>
+                        <TableHead headers={headers} />
+                        <tbody>
+                        {loaderData.map((el, i) => <TableRow key={i + el.lastname} country={el.country}
+                                                             city={el.city} firstname={el.firstname}
+                                                             lastname={el.lastname} email={el.email}/>)}
+                        </tbody>
+              </table>
+         </InfiniteScroll>
+
+)
+
 }
 export const Table = React.memo(TableMain)
