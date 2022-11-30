@@ -18,8 +18,8 @@ const TableRow : React.FC<Fields> = ({email, country,lastname,firstname,city}) =
           <td>{city}</td>
      </tr>
 }
-;
-export const Table : React.FC<{fields : Fields[], headers: string[]}> = ({ fields, headers}) => {
+
+const TableMain : React.FC<{fields : Fields[], headers: string[]}> = ({ fields, headers}) => {
 
 
      return <table className='main-table'>
@@ -31,3 +31,4 @@ export const Table : React.FC<{fields : Fields[], headers: string[]}> = ({ field
           </tbody>
      </table>
 }
+export const Table = React.memo(TableMain)

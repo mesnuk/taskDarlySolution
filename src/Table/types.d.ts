@@ -8,6 +8,3 @@ interface Fields {
 interface HeadingFieldsProps{
     headers : string[]
 }
-interface FieldsProps {
-    fields : Fields[]
-}

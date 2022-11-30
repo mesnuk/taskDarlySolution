@@ -1,5 +1,6 @@
 .main-form__layout {
-  max-width: 300px;
+  max-width: 500px;
+  min-width: 400px;
   margin: 10px auto 40px;
 
   h1{
@@ -7,22 +8,15 @@
     margin: 10px 0;
   }
 
-  .main-form__button {
-    display: block;
-    width: 90px;
-    height: 40px;
-    background-color: #a9a9a9;
-    font-weight: bold;
-    font-size: 18px;
-    letter-spacing: 1px;
-    margin: 0 auto;
-  }
-
   .main-form {
     display: flex;
     flex-direction: column;
     justify-content: center;
     margin: 0 auto;
+    padding: 30px;
+    border: 6px double #333333;
+    border-radius: 4px;
+    box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
 
     label {
       display: flex;
@@ -31,9 +25,29 @@
     }
 
     input {
+      width: 60%;
       padding: 8px;
       margin: 10px;
       border: 1px solid #000;
+      &:disabled {
+        color: darkcyan;
+        background-color: darkcyan;
+      }
+    }
+    .main-form__button {
+      display: block;
+      width: 120px;
+      height: 40px;
+      background-color: #a9a9a9;
+      font-weight: bold;
+      font-size: 18px;
+      letter-spacing: 1px;
+      margin: 0 auto;
+      border: 2px solid #000;
+      &:hover {
+        background-color: #fff;
+        cursor: cell;
+      }
     }
   }
 }

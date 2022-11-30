@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, {useEffect, useMemo, useState} from 'react';
 import './App.scss';
 import axios from "axios";
 import {Table} from "./Table/Table";
@@ -9,9 +9,11 @@ function App() {
     const [headers, setHeaders] : [string[], Function] = useState([]);
 
     const getUsers = () : void => {
-        axios.get('http://localhost:3001/users').then<Fields[]>(res => res.data).then(data => setUsers(data))    }
+        axios.get('http://localhost:3001/users').then<Fields[]>(res => res.data).then(data => setUsers(data))
+            .catch(err => alert(err))    }
     const getHeaders = () : void => {
-        axios.get('http://localhost:3001/headers').then<string[]>(res => res.data).then(data => setHeaders(data))    }
+        axios.get('http://localhost:3001/headers').then<string[]>(res => res.data).then(data => setHeaders(data))
+            .catch(err => alert(err))}
 
     useEffect(() => {
         getUsers();
