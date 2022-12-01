@@ -1,4 +1,4 @@
-import React, {useEffect, useMemo, useRef, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import './App.scss';
 import axios from "axios";
 import {Table} from "./Table/Table";
