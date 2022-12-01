@@ -29,6 +29,7 @@
       padding: 8px;
       margin: 10px;
       border: 1px solid #000;
+      border-radius: 5px;
       &:disabled {
         transition: all 0.5s ease-out;
         background-color: #a9a9a9;
@@ -47,12 +48,16 @@
       font-weight: bold;
       font-size: 18px;
       letter-spacing: 1px;
-      margin: 0 auto;
+      margin: 10px auto 0;
       border: 2px solid #000;
+      transition: background-color 1s ease-out;
       &:hover {
         transition: all 1s ease-out;
         background-color: #fff;
         cursor: cell;
+      }
+      &:active {
+        border-color: #008000;
       }
     }
   }

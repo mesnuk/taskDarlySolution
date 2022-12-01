@@ -1,14 +1,13 @@
-import React, {FormEvent, useState} from 'react'
+import React, {FormEvent, useEffect, useRef, useState} from 'react'
 import './Form.scss'
 import axios from "axios";
-import set = Reflect.set;
+import ReactLoading from 'react-loading';
+import autoAnimate from "@formkit/auto-animate";
 
 
-
-
-export const Form : React.FC<{setUsers : Function}> = ({setUsers}) => {
+const FormMain : React.FC<{setUsers : Function}> = ({setUsers}) => {
     const [loading, setLoading]: [boolean, Function] = useState<boolean>(false);
-
+    const parentLoading = useRef<HTMLDivElement>(null);
     const handleSubmit : Function = (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         let data : Fields = {
@@ -19,10 +18,11 @@ export const Form : React.FC<{setUsers : Function}> = ({setUsers}) => {
             city : ''
         }
         setLoading(true)
+
         const inputs = Array.from((event.target as HTMLFormElement).elements)
             .filter((el) => el.tagName === 'INPUT')
             .map(el => (el as HTMLInputElement));
-        console.log(loading)
+
         inputs.forEach(el => {
             data[el.name as keyof Fields] = el.value;
             el.disabled = !loading;
@@ -34,11 +34,14 @@ export const Form : React.FC<{setUsers : Function}> = ({setUsers}) => {
         setUsers((users : [] ) => [...users, data])
     }
 
-
+    useEffect(() => {
+        if (parentLoading.current) {
+            autoAnimate(parentLoading.current);
+        }
+    }, [parentLoading]);
 
     return (
-
-    <div className='main-form__layout'>
+    <div className='main-form__layout' ref={parentLoading}>
         <h1>Form</h1>
         <form className='main-form' onSubmit={(e) => handleSubmit(e)} >
             <label>
@@ -63,7 +66,9 @@ export const Form : React.FC<{setUsers : Function}> = ({setUsers}) => {
             </label>
             <button className='main-form__button' type='submit'disabled={loading}>Send</button>
         </form>
-        {loading && <h1>...</h1>}
+        {loading && <ReactLoading type='bars' color="#a9a9a9" className='loading'/>}
     </div>
     )
 }
+
+export const Form = React.memo(FormMain);

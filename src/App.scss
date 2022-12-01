@@ -1,8 +1,13 @@
 .App {
+  min-height: 100vh;
   text-align: left;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-between;
   max-width: 1200px;
   margin:0 auto;
+  .loading {
+    margin: 0 auto;
+  }
 }
+
